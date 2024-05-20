@@ -1,0 +1,143 @@
+"""
+
+Name: Kayla Zevanya
+Student ID: 32810806
+
+This code is written and curated by Kayla Zevanya, to complete the unit and hurdle requirements. 
+Content is tailored accordingly to the needs of the assignment.
+
+
+FIT2004 Assignment 2
+
+"""
+
+# ==========
+# Q1
+class OrfFinder:
+    """
+    Some class documentation would be good
+    """
+
+    def __init__(self, genome):
+        """
+        This init function that create magic
+        Written by l337coderblazeIT
+
+        Precondition:
+        Postcondition:
+
+        Input:
+            genome: bla
+        Return (unless you do have something to return):
+            None
+
+        Time complexity: 
+            Best case analysis:
+            Worst case analysis:
+        Space complexity: 
+            Input space analysis:
+            Aux space analysis::
+        """
+        # Initialization of the genome string
+        self.genome = genome
+
+        # List of the possible starting suffixes (or prefix) of the substring of genome
+        self.start_prefix = []
+
+        # List of the possible ending suffixes (or suffix) of the substring of genome
+        self.end_suffix = []
+
+        # Define N as the length of genome
+        N = len(self.genome)
+
+        # Create a list to store all the possible values of the start (or prefix) and end (or suffix) of the substrings of genome
+        list = []
+
+        # Filling the list to contain all the possible start (or prefix) and possible end (or suffix) of the substrings of genome
+        for l in range(N): # Iterate through to length of genome to fill in all possible substrings of genome
+
+            # Iterating through the range of l + 1 and N + 1
+            for i in range(l + 1, N + 1):
+
+                # Storing all the possible iterated substrings from l to i
+                sub_string = genome[l:i - 1]
+
+                # If the current start_prefix is lesser, then append the empty list to the start_prefix
+                if len(self.start_prefix) <= (i - 1): # Checking if there is space in index i - 1
+
+                    # Adding/appending the empty list into the start_prefix 
+                    self.start_prefix.append(list)
+
+                # If the current start_prefix has space, add/append l
+                else:
+
+                    # Adding/appending the value in index l into the list index i - 1 of the start_prefix
+                    self.start_prefix[i - 1].append(l)
+
+                # If the current end_suffix is lesser, then append the empty list to the end_suffix
+                if len(self.end_suffix) <= l: # Checking if there is space in index l
+                    
+                    # Adding/appending the empty list into the end_suffix
+                    self.end_suffix.append(list)
+
+                # If the current start_prefix has space, add/append i - 1
+                else:
+
+                    # Adding/appending the value in index i - 1 into the list index l of the end_suffix
+                    self.end_suffix[l].append(i - 1)
+
+
+    def find(self, start, end):
+        """
+        This climb function that performs magic
+        Written by l337coderblazeIT
+
+        Precondition:
+        Postcondition:
+
+        Input:
+            start: bla
+            end: bla bla
+        Return:
+            mysubstrings: bla bla bla
+
+        Time complexity: 
+            Best case analysis:
+            Worst case analysis:
+        Space complexity: 
+            Input space analysis:
+            Aux space analysis::
+        """
+        # Create a list to store all the results substrings of genome 
+        mysubstrings = []
+
+        # Define start_substring as the length of start
+        start_substring = len(start)
+
+        # Define end_substring as the length of end
+        end_substring = len(end)
+
+        # Define N as the length of genome
+        N = len(self.genome)
+
+        # Create a list to store all the starting indices 
+        start_index = []
+
+        # Create a list to store all the ending indices
+        end_index = []
+
+        # 
+        for _ in range(N - start_substring + 1):
+            if self.genome[_ : _ + start_substring] == start:
+                start_index.append(_)
+
+        for _ in range(end_substring - 1, N):
+            if self.genome[_ - end_substring + 1 : _ + 1] == end:
+                end_index.append(_)
+            
+        for s in range(start_index):
+            for e in range(end_index):
+                if s < e and (e - s + 1 >= start_substring + end_substring):
+                    mysubstrings.append(self.genome[s:e + 1])
+
+        return mysubstrings
