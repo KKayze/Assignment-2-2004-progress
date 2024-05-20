@@ -1,0 +1,88 @@
+# ==========
+# Q1
+
+class OrfFinder:
+    """
+    Some class documentation would be good
+    """
+
+    def __init__(self, genome):
+        """
+        This init function that create magic
+        Written by l337coderblazeIT
+
+        Precondition:
+        Postcondition:
+
+        Input:
+            genome: bla
+        Return (unless you do have something to return):
+            None
+
+        Time complexity: 
+            Best case analysis:
+            Worst case analysis:
+        Space complexity: 
+            Input space analysis:
+            Aux space analysis::
+        """
+        self.something = genome
+
+    def find(self, start, end):
+        """
+        This climb function that performs magic
+        Written by l337coderblazeIT
+
+        Precondition:
+        Postcondition:
+
+        Input:
+            start: bla
+            end: bla bla
+        Return:
+            mysubstrings: bla bla bla
+
+        Time complexity: 
+            Best case analysis:
+            Worst case analysis:
+        Space complexity: 
+            Input space analysis:
+            Aux space analysis::
+        """
+        mysubstrings = None
+        # do something
+        # return the solution
+        return mysubstrings
+
+# ==========
+# Q2
+
+class FlowNetworkOrSomething:
+    """
+    Some class that you might need???
+    """
+
+    def __init__(self):
+        """
+        Follow the same documentation format still
+        """
+        pass
+
+def allocate(preferences, officers_per_org, min_shifts, max_shifts):
+    """
+    Follow the same documentation format still
+    """
+    return None
+
+# ==========
+# Main Run
+# The following below should be deleted before your submission, but you can use it for testing etc... I am leaving it as an example...
+
+# Q1
+if __name__ == "__main__":
+    # Example
+    genome1 = OrfFinder("AAABBBCCC")
+    print(genome1.find("AAA","BB"))
+
+# Q2
+# not making anny example here, since everything else is the same. Do it yourself to avoid
