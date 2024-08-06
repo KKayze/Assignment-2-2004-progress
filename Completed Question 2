@@ -1,0 +1,370 @@
+# ==========
+# Q2
+class Vertex:
+    def __init__(self, vertex_id):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+        The function is to initialize the vertex to represent the vertex in the residual graph. As later on, it is necessary to create a graph and within the graph there is a vertex
+        and an edge, so in this function is to initialize the vertex to contain the Edges.
+
+        Approach Description:
+        The function will also be explained in more detailed description alongside with the code written by myself including adding an edge within this function as a list to store edges that 
+        is connected to the vertex.
+
+        Input:
+            vertex_id: The input is the vertex_id in the form of an id (or identifier).
+        Output:
+            None
+
+        Time Complexity:
+            Best case time complexity: O(1)
+            Best case analysis: The time complexity will be O(1) as the function only contain initialization of attributes for the vertex.
+
+        Space complexity: 
+            Worst case time complexity: O(1)
+            Worst case analysis: The space complexity will be O(1) as the function only contain initialization of attributes for the vertex.
+        """
+        # Initialization of the unique identifier for the vertex
+        self.vertex_id = vertex_id
+
+        # List of possible edges connecting to the vertex 
+        self.edges = []
+
+        # Initialization of the visited as boolean to contain True
+        self.visited = True # Initialization to determine of the vertex is visited
+
+        # Initialization of the previous to None
+        self.previous = None
+
+    def add_edge(self, v_source, v_target, space, edge_exist):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+        The function is to append/add the possible edge into the list of edges. 
+
+        Approach Description:
+        This function will be explained in more detailed description alongside with the code written by myself. The approach is to append/add the
+        edges to the list of edges previously initialized and ensure the function will be able to be called later on.
+
+        Input:
+           edge: The input is an edge itself
+        Output:
+            None
+
+        Time Complexity:
+            Best case time complexity: O(1)
+            Best case analysis: The time complexity will be O(1) as the function only contain initialization of attributes for adding the edge later on.
+
+        Space complexity: 
+            Worst case time complexity: O(1)
+            Worst case analysis: The space complexity will be O(1) as the function only contain initialization of attributes for adding the edge later on.
+        """
+
+
+        # Initialization of the add_edge to add/append an edge to the list 
+        self.add_edge.append(Edge(v_source, v_target, space, edge_exist)) # Initialization to append/add an edge to the add_edge that contains the list previously initialized
+
+class Edge:
+    def __init__(self, v_source: Vertex, v_target: Vertex, space, edge_exist):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+        The function is to initialize the source, target and space that later on is used for the residual graph.
+
+        Approach Description:
+        This function will be explained in more detailed description alonside with the code written by myself. The approach is to give elements or characteristic to the edge such as v_source (source) of the vertex of the edge, the v_target (target) of the vertex of the edge and space (capacity)
+        of the edge.
+
+        Input:
+            v_source: The first input is the v_source for the source vertex of the edge
+            v_target: The second input is the v_target for the targeted vertex of the edge
+            space: The third input is the space (or capacity) for the capacity of the edge
+        Output:
+            None
+
+        Time Complexity:
+            Best case time complexity: O(1)
+            Best case analysis: The time complexity will be O(1) as the function only contain initialization of attributes for the edge.
+
+        Space complexity: 
+            Worst case time complexity: O(1)
+            Worst case analysis: The space complexity will be O(1) as the function only contain initialization of attributes for the edge.
+        """
+        # Initialization of the edge_exist as boolean to contain True
+        edge_exist = False
+
+        # Initialization of the source vertex of the edge
+        self.v_source = v_source
+
+        # # Initialization of the target vertex of the edge
+        self.v_target = v_target
+
+        # Initialization of the space (or capacity) for the edge
+        self.space = space
+
+        # Initialization of the network flow and is set to 0
+        self.network_flow = 0     
+
+        # Initialization of the residual space
+        self.residual_space = self.space - self.network_flow # The residual space calculates the available capacity of the edge
+
+        # Initialization of the edge_exist
+        self.edge_exist = edge_exist
+
+class ResidualNetwork:
+    def __init__(self, weight):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+        The function is to initialize the flow network. The function is to manage the vertices and edges of the network flow and the weight (number of vertices) that the network flow
+        will contain.
+
+        Approach Description:
+        This function will be explained in more detailed description alonside with the code written by myself. The approach is to initialize the weight of the function that will 
+        determine the number of vertices of the network flow and a list of vertices in the network flow.
+        
+        Input:
+            weight: The weight (number of vertices) of the network flow
+        Output:
+            None
+
+        Time Complexity:
+            Best case time complexity: O(1)
+            Best case analysis: The time complexity will be O(1) as the function only contain initialization of attributes for the residual network.
+
+        Space complexity: 
+            Worst case time complexity: O(1)
+            Worst case analysis: The space complexity will be O(1) as the function only contain initialization of attributes for the residual network.
+        """
+        # Initialization of the weight 
+        self.weight = weight # Initialization of the number of vertices of the network (weight)
+
+        # The for loop will iterate through the range of the weight to initialize the vertices
+        for i in range(weight):
+
+            # Initialize the v to contain the vertices in index i
+            self.v = Vertex(i)
+
+    def breadth_first_search(self, start_v, end_v):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+        The function is to perform a breadth first search that finds the shortest path from the source vertex to other possible vertices. As the residual flow graph is not weighted, 
+        the breadth first search can be initialized. 
+        
+        Approach Description:
+        This function will be explained in more detailed description alonside with the code written by myself. The function will update the previous vertex with an edge to reversely 
+        follow the path from end to start. This method is to ensure that the path is the shortest path.
+    
+        Input: 
+            start_v: The first input is start_v which is the starting vertex where the path ends  
+            end_v: The second input is end_v which is the last vertex where the path begins  
+       
+        Output: 
+            None 
+                   
+        Time complexity: 
+        Best case time complexity: O(V + E) 
+        Best case time analysis: The time complexity will be O(V + E) since it requires all vertices and edges to be traversed
+    
+        Space complexity: 
+        Worst case time complexity: O(V + E) 
+        Worst case time analysis: The space complexity will be O(V + E) since the graph is stored in an adjacency list 
+        """
+        # Initialization of the visited to contain deque list
+        visited = deque([])
+
+        # Appending/adding the start/source vertex into the list
+        visited.append(start_v)
+
+        # Iterating through the loop in the length of the visited
+        while len(visited):
+
+            # Initialization of the current_v to visited while removing/pop in index 0
+            current_v = visited.pop(0)
+
+            # Initializtion of the current_v to be boolean True
+            current_v.visited = True
+
+            # Checking if the current_v is the same/equal to end_v
+            if current_v == end_v:
+                return
+            
+            # Iterating the edge through the loop in  self.vertices[current_v].edges
+            for edge in self.vertices[current_v].edges:
+
+                # Checking if the current edge exist or not
+                if edge.edge_exist:
+
+                    # If the current edge exist, initialize the next vertex
+                    next_vertex = edge.v_target # initialization of the next_vertex to contain edge.v_target
+
+                # Checking if the next vertex has been visited or not
+                if not next_vertex.visited:
+
+                    # If the next vertex is not visited, add/append the next vertex as visited
+                    visited.append(next_vertex)
+
+                    # Initialization of the next vertex to contain boolean of True
+                    next_vertex.visited = True
+
+                    # Initialization of the previous vertex to contain edge
+                    next_vertex.previous = edge
+        
+        # Return nothing
+        return
+
+
+    def ford_fulkerson(self):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+        The function is to perform a breadth first search that finds the shortest path from the source vertex to other possible vertices. As the residual flow graph is not weighted, 
+        the breadth first search can be initialized. 
+        
+        Approach Description:
+        This function will be explained in more detailed description alonside with the code written by myself. The function will update the previous vertex with an edge to reversely 
+        follow the path from end to start. This method is to ensure that the path is the shortest path.
+    
+        Input: 
+            start_v: The first input is start_v which is the starting vertex where the path ends  
+            end_v: The second input is end_v which is the last vertex where the path begins  
+       
+        Output: 
+            None 
+                   
+        Time complexity: 
+        Best case time complexity: O(|V| * n) 
+        Best case time analysis: The time complexity will be O(|V| * n) where V is the vertices and n is the maximum flow
+    
+        Space complexity: 
+        Worst case time complexity: O(|V| * E^2) 
+        Worst case time analysis: The space complexity will be O(|V| * E^2) where V is the number of vertices and E is the number of edges
+        """
+        parent = [None] * self.size  
+        max_flow = 0  
+
+        while self.bfs(source, sink, parent):
+            path_flow = float('Inf')
+            s = sink
+
+            while s != source:
+                edge = parent[s]
+                path_flow = min(path_flow, edge.residual_capacity())
+                s = edge.source
+
+            v = sink
+            while v != source:
+                edge = parent[v]
+                edge.flow += path_flow
+                edge.reverse.flow -= path_flow
+                v = edge.source
+
+            max_flow += path_flow
+
+        return max_flow
+        
+
+    def allocate(preferences, officers_per_org, min_shifts, max_shifts):
+        """
+        Written By: Kayla Zevanya (32810806)
+
+        Function Description:
+        The function is to contain a list of preferred shifts provided by each security officer and the number of security officers requested by the companies for each shift as stated
+        in the assignment specification.
+        
+        Approach Description:
+        This function will be explained in more detailed description alonside with the code written by myself. 
+    
+        Input: 
+            preferences: The first input is preferences which is a list of list
+            officers_per_org: The second input is officers_per_org which is list of list that contain a non-negative number that specifies 
+            how many security officers company Cj needs for shift Sk on each day of that month as stated in the assignment specification.
+            min_shifts: The third input is min_shifts in a form of integer that represents minimum number of shifts
+            max_shifts: The fourth input is max_shifts in a form of integer that represents maximum number of shifts
+
+        Output: 
+            None 
+                   
+        Time complexity: 
+        Best case time complexity: O(m * n * n)
+        Best case time analysis: The time complexity will be O(m * n * n) where m is the number of companies and n is the number of offices
+    
+        Space complexity: 
+        Worst case time complexity: O(V + E) 
+        Worst case time analysis: The space complexity will be O(V + E) where V is the number of vertices and E is the number of edges
+        """
+        num_officers = len(preferences)  # Number of security officers
+        num_companies = len(officers_per_org)  # Number of companies
+        days = 30  # Number of days in the month
+        shifts_per_day = 3  # Number of shifts per day
+        total_shifts = days * shifts_per_day  # Total number of shifts in the month
+
+        # Calculate the total number of nodes in the flow network
+        total_nodes = 1 + num_officers + total_shifts + (num_companies * total_shifts) + 1
+        source = 0  # Source node index
+        sink = total_nodes - 1  # Sink node index
+
+        network = FlowNetwork(total_nodes)
+    
+        # Add edges from source to officers with capacity max_shifts
+        for i in range(num_officers):
+            network.add_edge(source, i + 1, max_shifts)
+    
+        # Add edges from officers to their preferred shifts
+        officer_shift_start = 1
+        shift_start = officer_shift_start + num_officers
+        for i in range(num_officers):
+            for shift in range(shifts_per_day):
+                if preferences[i][shift] == 1:
+                    for day in range(days):
+                        network.add_edge(i + 1, shift_start + (day * shifts_per_day) + shift, 1)
+    
+        # Add edges from shifts to companies
+        shift_start = officer_shift_start + num_officers
+        company_shift_start = shift_start + total_shifts
+        for j in range(num_companies):
+            for shift in range(shifts_per_day):
+                for day in range(days):
+                    required_officers = officers_per_org[j][shift]
+                    network.add_edge(shift_start + (day * shifts_per_day) + shift, company_shift_start + (j * total_shifts) + (day * shifts_per_day) + shift, required_officers)
+    
+        # Add edges from companies to sink with capacity based on requirements
+        for j in range(num_companies):
+            for shift in range(shifts_per_day):
+                for day in range(days):
+                    required_officers = officers_per_org[j][shift]
+                    network.add_edge(company_shift_start + (j * total_shifts) + (day * shifts_per_day) + shift, sink, required_officers)
+    
+        # Compute the maximum flow in the network
+        max_flow = network.ford_fulkerson(source, sink)
+    
+        # Calculate the total required flow
+        total_required_flow = sum(sum(officers_per_org[j]) for j in range(num_companies)) * days
+        if max_flow < total_required_flow:
+    
+        # Initialize the allocation matrix
+        allocation = [[[[0] * shifts_per_day for _ in range(days)] for _ in range(num_companies)] for _ in range(num_officers)]
+    
+        # Populate the allocation matrix based on the flow network results
+        for i in range(num_officers):
+            for shift in range(shifts_per_day):
+                if preferences[i][shift] == 1:
+                    for day in range(days):
+                        shift_node = shift_start + (day * shifts_per_day) + shift
+                        for j in range(num_companies):
+                            company_shift_node = company_shift_start + (j * total_shifts) + (day * shifts_per_day) + shift
+                            for edge in network.vertices[shift_node].edges:
+                                if edge.target == company_shift_node and edge.flow > 0:
+                                    allocation[i][j][day][shift] = 1
+                                    edge.flow -= 1
+                                    break
+    
+        return allocation
